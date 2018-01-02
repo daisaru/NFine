@@ -379,6 +379,8 @@
     <Content Include="Content\js\zsign\jquery.zsign.css" />
     <Content Include="Content\js\zsign\jquery.zsign.js" />
     <Content Include="Content\js\zsign\signet.gif" />
+    <Content Include="DB\NFineBase.sql" />
+    <Content Include="DB\NFine_Business.pdb" />
     <Content Include="Global.asax" />
     <Content Include="Index.htm" />
     <Content Include="Web.config" />
@@ -621,6 +623,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
+    <Content Include="DB\NFine_Business.ldb" />
+    <Content Include="DB\NFine_Business.ldm" />
+    <Content Include="DB\NFine_Business.pdm" />
+    <Content Include="DB\Workspace.sws" />
+    <Content Include="DB\数据库关系图.ldb" />
+    <Content Include="DB\数据库关系图.LDM" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

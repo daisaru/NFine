@@ -44,7 +44,16 @@
     <Compile Include="01 Infrastructure\IDeleteAudited.cs" />
     <Compile Include="01 Infrastructure\IEntity.cs" />
     <Compile Include="01 Infrastructure\IModificationAudited.cs" />
+    <Compile Include="03 Entity\Business\CustomerAccountEntity.cs" />
+    <Compile Include="03 Entity\Business\CustomerEntity.cs" />
+    <Compile Include="03 Entity\Business\CustomerTypeEntity.cs" />
+    <Compile Include="03 Entity\Business\DeviceCustomerEntity.cs" />
+    <Compile Include="03 Entity\Business\DeviceEntity.cs" />
+    <Compile Include="03 Entity\Business\DeviceStatusEntity.cs" />
+    <Compile Include="03 Entity\Business\DeviceTypeEntity.cs" />
     <Compile Include="03 Entity\Business\ProductEntity.cs" />
+    <Compile Include="03 Entity\Business\RoomEntity.cs" />
+    <Compile Include="03 Entity\Business\SectionEntity.cs" />
     <Compile Include="03 Entity\SystemManage\AreaEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleButtonEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleEntity.cs" />

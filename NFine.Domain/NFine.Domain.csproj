@@ -64,7 +64,16 @@
     <Compile Include="03 Entity\SystemSecurity\FilterIPEntity.cs" />
     <Compile Include="03 Entity\SystemSecurity\LogEntity.cs" />
     <Compile Include="02 ViewModel\AuthorizeActionModel.cs" />
+    <Compile Include="04 IRepository\Business\ICustomerAccountRepository.cs" />
+    <Compile Include="04 IRepository\Business\ICustomerRepository.cs" />
+    <Compile Include="04 IRepository\Business\ICustomerTypeRepository.cs" />
+    <Compile Include="04 IRepository\Business\IDeviceCustomerRepository.cs" />
+    <Compile Include="04 IRepository\Business\IDeviceRepository.cs" />
+    <Compile Include="04 IRepository\Business\IDeviceStatusRepository.cs" />
+    <Compile Include="04 IRepository\Business\IDeviceTypeRepository.cs" />
     <Compile Include="04 IRepository\Business\IProductRepository.cs" />
+    <Compile Include="04 IRepository\Business\IRoomRepository.cs" />
+    <Compile Include="04 IRepository\Business\ISectionRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IAreaRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IItemsDetailRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IItemsRepository.cs" />

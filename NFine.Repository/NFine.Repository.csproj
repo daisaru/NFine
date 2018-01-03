@@ -39,7 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\CustomerAccountRepository.cs" />
+    <Compile Include="Business\CustomerRepository.cs" />
+    <Compile Include="Business\CustomerTypeRepository.cs" />
+    <Compile Include="Business\DeviceCustomerRepository.cs" />
+    <Compile Include="Business\DeviceRepository.cs" />
+    <Compile Include="Business\DeviceStatusRepository.cs" />
+    <Compile Include="Business\DeviceTypeRepository.cs" />
     <Compile Include="Business\ProductRepository.cs" />
+    <Compile Include="Business\RoomRepository.cs" />
+    <Compile Include="Business\SectionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManage\ItemsDetailRepository.cs" />
     <Compile Include="SystemManage\ItemsRepository.cs" />

@@ -61,10 +61,6 @@ namespace NFine.Web.Areas.SystemManage.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
-            //测试
-            NFine.Application.Business.ProductApp productApp = new Application.Business.ProductApp();
-            var productlist = productApp.GetList();
-
             var data = areaApp.GetForm(keyValue);
             return Content(data.ToJson());
         }

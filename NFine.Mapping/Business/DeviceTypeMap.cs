@@ -3,11 +3,11 @@ using NFine.Domain.Entity.Business;
 
 namespace NFine.Mapping.Business
 {
-    public class ProductMap : EntityTypeConfiguration<ProductEntity>    
+    public class DeviceTypeMap : EntityTypeConfiguration<DeviceTypeEntity>
     {
-        public ProductMap()
+        public DeviceTypeMap()
         {
-            this.ToTable("Product");
+            this.ToTable("Buz_DeviceType");
             this.HasKey(t => t.F_Id);
         }
     }

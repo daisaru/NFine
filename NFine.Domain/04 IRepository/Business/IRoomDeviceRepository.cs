@@ -8,7 +8,7 @@ using NFine.Domain.Entity.Business;
 
 namespace NFine.Domain.IRepository.Business
 {
-    public interface IDeviceCustomerRepository : IRepositoryBase<DeviceCustomerEntity>
+    public interface ISectionDeviceRepository : IRepositoryBase<RoomDeviceEntity>
     {
     }
 }

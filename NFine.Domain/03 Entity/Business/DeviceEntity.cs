@@ -12,8 +12,6 @@ namespace NFine.Domain.Entity.Business
 
         public string F_DeviceName { get; set; }
         public string F_ParentDeviceId { get; set; }
-        public string F_RoomId { get; set; }
-        public string F_SectionId { get; set; }
         public string F_DeviceTypeId { get; set; }
         public string F_Brand { get; set; }
         public string F_Model { get; set; }

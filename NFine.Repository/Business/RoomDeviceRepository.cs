@@ -4,7 +4,7 @@ using NFine.Domain.IRepository.Business;
 
 namespace NFine.Repository.Business
 {
-    public class SectionRepository : RepositoryBase<SectionEntity>, ISectionRepository
+    public class RoomDeviceRepository : RepositoryBase<RoomDeviceEntity>, ISectionDeviceRepository
     {
     }
 }

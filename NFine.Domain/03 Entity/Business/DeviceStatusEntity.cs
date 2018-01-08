@@ -11,8 +11,6 @@ namespace NFine.Domain.Entity.Business
         public string F_Id { get; set; }
 
         public string F_DeviceStatusName { get; set; }
-        public string F_StatusStartTime { get; set; }
-        public string F_StatusEndTime { get; set; }
 
         public string F_Description { get; set; }
         public DateTime? F_CreatorTime { get; set; }

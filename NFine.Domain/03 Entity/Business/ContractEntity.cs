@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace NFine.Domain.Entity.Business
 {
-    public class SectionEntity : IEntity<SectionEntity>, ICreationAudited, IDeleteAudited, IModificationAudited
+    public class ContractEntity : IEntity<ContractEntity>, ICreationAudited, IDeleteAudited, IModificationAudited
     {
         public string F_Id { get; set; }
-        
-        public string F_SectionName { get; set; }
+
         public string F_RoomId { get; set; }
+        public string F_SectionId { get; set; }
         public string F_CustomerId { get; set; }
+        public DateTime F_ContractStart { get; set; }
+        public DateTime F_ContractEnd { get; set; }
 
         public string F_Description { get; set; }
+
         public DateTime? F_CreatorTime { get; set; }
         public string F_CreatorUserId { get; set; }
         public DateTime? F_LastModifyTime { get; set; }

@@ -48,16 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\ContractMap.cs" />
     <Compile Include="Business\CustomerAccountMap.cs" />
     <Compile Include="Business\CustomerMap.cs" />
     <Compile Include="Business\CustomerTypeMap.cs" />
-    <Compile Include="Business\DeviceCustomerMap.cs" />
+    <Compile Include="Business\RoomDeviceMap.cs" />
     <Compile Include="Business\DeviceMap.cs" />
     <Compile Include="Business\DeviceStatusMap.cs" />
     <Compile Include="Business\DeviceTypeMap.cs" />
     <Compile Include="Business\ProductMap.cs" />
     <Compile Include="Business\RoomMap.cs" />
-    <Compile Include="Business\SectionMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManage\AreaMap.cs" />
     <Compile Include="SystemManage\ItemsDetailMap.cs" />

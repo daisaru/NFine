@@ -16,7 +16,6 @@ namespace NFine.Domain.Entity.Business
         public string F_OwnerId { get; set; }
         public string F_ProvinceId { get; set; }
         public string F_CityId { get; set; }
-        public string F_TownId { get; set; }
         public string F_Address { get; set; }
         public string F_Lng { get; set; }
         public string F_Lat { get; set; }

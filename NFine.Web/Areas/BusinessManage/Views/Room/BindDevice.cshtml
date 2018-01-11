@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "BindDevice";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script>
+
+    var keyValue = $.request("keyValue");
+    var deviceTypes;
+
+    $(function () {
+
+        initControl();
+    });
+
+    function deviceList() {
+
+        console.log("Log: Into deviceList");
+        var $deviceListFrom = $("#currentDeviceGridList");
+        console.log($deviceListFrom);
+        $deviceListFrom.dataGrid({
+            treeGrid: true,
+            treeGridModel: "adjacency",
+            ExpandColumn: "F_DeviceTypeName",
+            url: "/BusinessManage/Room/GetDeviceTreeGridJson?keyValue=" + keyValue,
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "设备主键", name: "F_Id", hidden: true, key: true },
+                { label: "设备名称", name: "F_DeviceName", width: 100, align: 'left' },
+                { label: "设备类型", name: "F_DeviceTypeName", width: 100, align: 'left' },
+                { label: "设备标识", name: "F_DeviceId", width: 200, align: 'left' },
+                { label: '设备状态', name: 'F_StatusName', width: 100, align: 'left' },
+                { label: '备注', name: 'F_Description', width: 300, align: 'left' }
+            ]
+        });
+    }
+
+    function show_type_items() {
+        //从服务器端取回数据
+        $.ajax({
+            url: "/BusinessManage/Room/GetDeviceTypeTreeSelectJson",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                var html = "";
+                var pro = data;
+                deviceTypes = data;
+                html += "<option value=''> --请选择-- </option>"
+                if (pro) {
+                    for (var i = 0; i < pro.length; i++) {
+                        var p = pro[i];
+                        html += "<option value='" + p.id + "'>" + p.text + "</option>"
+                    }
+                }
+
+                $("#F_DeviceTypeId").empty();
+                $("#F_DeviceTypeId").html(function (i, origText) {
+                    return html;
+                });
+
+                $("#F_DeviceTypeId").change(function () {
+                    type_select_change(pro);
+                });
+            }
+        });
+    }
+
+    function type_select_change(types) {
+        $("#F_Id").empty();
+
+        var typeId = $("#F_DeviceTypeId").val();
+
+        if (typeId == '') {
+            return false;
+        }
+        var devices = null;
+        for (var i = 0; i < types.length; i++) {
+            var p = types[i];
+            if (p.id == typeId) {
+                devices = p.data;
+                break;
+            }
+        }
+
+        for (var i = 0; i < devices.length; i++) {
+            device = devices[i];
+            var o = new Option(device.F_DeviceName, device.F_Id);
+            $("#F_Id").append(o);
+        }
+    }
+
+    function initControl() {
+
+        deviceList();
+        show_type_items();
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/BusinessManage/Room/SubmitFormBindDevice?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+
+<div class="gridPanel" style="padding-top: 5px; margin-left:10px; margin-right:5px; width:95%;">
+    <span>当前绑定设备：</span>
+    <table id="currentDeviceGridList"></table>
+</div>
+
+<form id="form1" style="padding-top: 5px; margin-left:5px; margin-right: 5px;">
+    <div style="text-align:center; padding-top: 20px; margin-right: 20px;">
+        <table class="form" style="width: 60%; margin:auto;">
+            <tr>
+                <th class="formTitle">设备类型</th>
+                <td class="formValue">
+                    <select id="F_DeviceTypeId" name="F_DeviceTypeId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">设备编号</th>
+                <td class="formValue">
+                    <select id="F_Id" name="F_Id" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">
+                    备注
+                </th>
+                <td class="formValue">
+                    <textarea id="F_Description" name="F_Description" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

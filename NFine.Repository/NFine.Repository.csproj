@@ -45,8 +45,6 @@
     <Compile Include="Business\CustomerTypeRepository.cs" />
     <Compile Include="Business\RoomDeviceRepository.cs" />
     <Compile Include="Business\DeviceRepository.cs" />
-    <Compile Include="Business\DeviceStatusRepository.cs" />
-    <Compile Include="Business\DeviceTypeRepository.cs" />
     <Compile Include="Business\ProductRepository.cs" />
     <Compile Include="Business\RoomRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,8 +2,12 @@
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
+
 <script>
+
     var keyValue = $.request("keyValue");
+    var areaDatas;
+
     $(function () {
         initControl();
         if (!!keyValue) {
@@ -14,14 +18,76 @@
                 async: false,
                 success: function (data) {
                     $("#form1").formSerialize(data);
+                    parent_select_change(areaDatas);
+                    $("#form1").formSerialize(data);
                 }
             });
         }
     });
+
+    function show_province_items() {
+        //从服务器端取回数据
+        $.ajax({
+            url: "/BusinessManage/Room/GetAddressTreeSelectJson",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                var html = "";
+                var pro = data;
+                areaDatas = data;
+                html += "<option value=''> --请选择-- </option>"
+                if (pro) {
+                    for (var i = 0; i < pro.length; i++) {
+                        var p = pro[i];
+                        html += "<option value='" + p.id + "'>" + p.text + "</option>"
+                    }
+                }
+
+                $("#F_ProvinceId").empty();
+                $("#F_ProvinceId").html(function (i, origText) {
+                    return html;
+                });
+
+                $("#F_ProvinceId").change(function () {
+                    parent_select_change(pro);
+                });
+            }
+        });
+    }
+
+    function parent_select_change(province) {
+        $("#F_CityId").empty();
+
+        var parent = $("#F_ProvinceId").val();
+
+        if (parent == '') {
+            return false;
+        }
+        var cities = null;
+        for (var i = 0; i < province.length; i++) {
+            var p = province[i];
+            if (p.id == parent) {
+                cities = p.data;
+                break;
+            }
+        }
+
+        for (var i = 0; i < cities.length; i++) {
+            city = cities[i];
+            var o = new Option(city.F_FullName, city.F_Id);
+            $("#F_CityId").append(o);
+        }
+    }
+
     function initControl() {
         $("#F_ParentRoomId").bindSelect({
             url: "/BusinessManage/Room/GetTreeSelectJson"
         });
+        $("#F_OwnerId").bindSelect({
+            url: "/BusinessManage/Room/GetOwnerSelectJson"
+        });
+
+        show_province_items();   
     }
     function submitForm() {
         if (!$('#form1').formValid()) {
@@ -40,7 +106,7 @@
 
 <form id="form1">
     <div style="padding-top: 20px; margin-right: 20px;">
-        <table class="form">
+        <table class="form" style="width: 95%;">
             <tr>
                 <th class="formTitle">上级</th>
                 <td class="formValue">
@@ -52,13 +118,73 @@
             <tr>
                 <th class="formTitle">房间名称</th>
                 <td class="formValue">
-                    <input id="F_RoomName" name="F_RoomName" type="text" class="form-control required" placeholder="请输入名称" />
+                    <input id="F_RoomName" name="F_RoomName" type="text" class="form-control required" placeholder="请输入房间名称" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">小区名称</th>
                 <td class="formValue">
-                    <input id="F_CommunityName" name="F_CommunityName" type="text" class="form-control required" placeholder="请输入名称" />
+                    <input id="F_CommunityName" name="F_CommunityName" type="text" class="form-control required" placeholder="请输入所在小区名称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">房屋所有人</th>
+                <td class="formValue">
+                    <select id="F_OwnerId" name="F_OwnerId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">省/直辖市</th>
+                <td class="formValue">
+                    <select id="F_ProvinceId" name="F_ProvinceId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">市/区</th>
+                <td class="formValue">
+                    <select id="F_CityId" name="F_CityId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">小区地址</th>
+                <td class="formValue">
+                    <input id="F_Address" name="F_Address" type="text" class="form-control required" placeholder="请输入所在小区地址" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">小区门牌号</th>
+                <td class="formValue">
+                    <input id="F_AddressNumber" name="F_AddressNumber" type="text" class="form-control required" placeholder="请输入小区门牌号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">楼号</th>
+                <td class="formValue">
+                    <input id="F_BuildingNumber" name="F_BuildingNumber" type="text" class="form-control required" placeholder="请输入楼号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">单元号</th>
+                <td class="formValue">
+                    <input id="F_SectionNumber" name="F_SectionNumber" type="text" class="form-control required" placeholder="请输入单元号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">房号</th>
+                <td class="formValue">
+                    <input id="F_RoomNumber" name="F_RoomNumber" type="text" class="form-control required" placeholder="请输入房号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">定位经度</th>
+                <td class="formValue">
+                    <input id="F_Lng" name="F_Lng" type="text" class="form-control required" placeholder="请输入小区经度" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">定位纬度</th>
+                <td class="formValue">
+                    <input id="F_Lat" name="F_Lat" type="text" class="form-control required" placeholder="请输入小区纬度" />
                 </td>
             </tr>
             <tr>

@@ -111,7 +111,11 @@
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
     <Compile Include="Areas\BusinessManage\BusinessManageAreaRegistration.cs" />
+    <Compile Include="Areas\BusinessManage\Controllers\DeviceController.cs" />
     <Compile Include="Areas\BusinessManage\Controllers\RoomController.cs" />
+    <Compile Include="Areas\BusinessManage\Models\CustomerEntityExtend.cs" />
+    <Compile Include="Areas\BusinessManage\Models\DeviceEntityExtend.cs" />
+    <Compile Include="Areas\BusinessManage\Models\RoomEntityExtend.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SendMailController.cs" />
@@ -144,6 +148,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -159,8 +164,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\weathericons-regular-webfont.svg" />
     <Content Include="Content\img\ajax-loader.gif" />
-    <Content Include="Content\img\alipay.jpg" />
-    <Content Include="Content\img\alipayimg.png" />
     <Content Include="Content\img\button_pm_close.png" />
     <Content Include="Content\img\cy-reward-title-bg.jpg" />
     <Content Include="Content\img\loading.gif" />
@@ -187,9 +190,6 @@
     <Content Include="Content\img\samples\scarlet.png" />
     <Content Include="Content\img\samples\scarlett-300.jpg" />
     <Content Include="Content\img\signet.gif" />
-    <Content Include="Content\img\wechat.jpg" />
-    <Content Include="Content\img\weipayimg.png" />
-    <Content Include="Content\img\weixin_nfine.png" />
     <Content Include="Content\js\bootstrap\bootstrap.js" />
     <Content Include="Content\js\bootstrap\bootstrap.min.css" />
     <Content Include="Content\js\charts\Chart.js" />
@@ -387,6 +387,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\BusinessManage\Views\Room\Index.cshtml" />
     <Content Include="Areas\BusinessManage\Views\Room\Form.cshtml" />
+    <Content Include="Areas\BusinessManage\Views\Room\BindDevice.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -577,7 +578,7 @@
     <Content Include="Areas\ReportManage\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\BusinessManage\Models\" />
+    <Folder Include="Areas\BusinessManage\Views\Device\" />
     <Folder Include="Areas\ReportManage\Views\Echarts\" />
   </ItemGroup>
   <ItemGroup>

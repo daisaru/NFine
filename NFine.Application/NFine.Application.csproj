@@ -44,8 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="01 Infrastructure\DbLogType.cs" />
+    <Compile Include="Business\CustomerApp.cs" />
+    <Compile Include="Business\DeviceApp.cs" />
     <Compile Include="Business\ProductApp.cs" />
     <Compile Include="Business\RoomManageApp.cs" />
+    <Compile Include="Business\SystemServiceApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManage\ItemsApp.cs" />
     <Compile Include="SystemManage\ItemsDetailApp.cs" />

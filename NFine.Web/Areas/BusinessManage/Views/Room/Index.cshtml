@@ -20,9 +20,9 @@
                 { label: "房间名称", name: "F_RoomName", width: 200, align: 'left' },
                 { label: "小区名称", name: "F_CommunityName", width: 100, align: 'left' },
                 { label: "房东信息主键", name: "F_OwnerId", hidden: true },
-                { label: '省/直辖市', name: 'F_ProvinceId', width: 100, align: 'left' },
-                { label: '市/区', name: 'F_CityId', width: 100, align: 'left' },
-                { label: '县', name: 'F_TownId', width: 100, align: 'left' },
+                { label: "房屋所有人", name: "F_OwnerName", width: 100, align: 'left' },
+                { label: '省/直辖市', name: 'F_ProvinceName', width: 100, align: 'left' },
+                { label: '市/区', name: 'F_CityName', width: 100, align: 'left' },
                 { label: '地址', name: 'F_Address', width: 100, align: 'left' },
                 { label: '门牌号', name: 'F_AddressNumber', width: 50, align: 'left' },
                 { label: '楼号', name: 'F_BuildingNumber', width: 50, align: 'left' },
@@ -78,6 +78,19 @@
             }
         })
     }
+    function btn_bind() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "BindDevice",
+            title: "绑定设备",
+            url: "/BusinessManage/Room/BindDevice?keyValue=" + keyValue,
+            width: "800px",
+            height: "400px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
 </script>
 
 <div class="topPanel">
@@ -107,6 +120,8 @@
                 <li class="first">已选中<span>1</span>项</li>
                 <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改房源</a></li>
                 <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除房源</a></li>
+                <li class="split"></li>
+                <li><a id="NF-bind" authorize="yes" onclick="btn_bind()"><i class="fa fa-magnet"></i>绑定设备</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>

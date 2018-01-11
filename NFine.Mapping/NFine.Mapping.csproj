@@ -54,8 +54,6 @@
     <Compile Include="Business\CustomerTypeMap.cs" />
     <Compile Include="Business\RoomDeviceMap.cs" />
     <Compile Include="Business\DeviceMap.cs" />
-    <Compile Include="Business\DeviceStatusMap.cs" />
-    <Compile Include="Business\DeviceTypeMap.cs" />
     <Compile Include="Business\ProductMap.cs" />
     <Compile Include="Business\RoomMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

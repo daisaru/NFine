@@ -50,8 +50,6 @@
     <Compile Include="03 Entity\Business\CustomerTypeEntity.cs" />
     <Compile Include="03 Entity\Business\RoomDeviceEntity.cs" />
     <Compile Include="03 Entity\Business\DeviceEntity.cs" />
-    <Compile Include="03 Entity\Business\DeviceStatusEntity.cs" />
-    <Compile Include="03 Entity\Business\DeviceTypeEntity.cs" />
     <Compile Include="03 Entity\Business\ProductEntity.cs" />
     <Compile Include="03 Entity\Business\RoomEntity.cs" />
     <Compile Include="03 Entity\SystemManage\AreaEntity.cs" />
@@ -70,8 +68,6 @@
     <Compile Include="04 IRepository\Business\ICustomerTypeRepository.cs" />
     <Compile Include="04 IRepository\Business\IRoomDeviceRepository.cs" />
     <Compile Include="04 IRepository\Business\IDeviceRepository.cs" />
-    <Compile Include="04 IRepository\Business\IDeviceStatusRepository.cs" />
-    <Compile Include="04 IRepository\Business\IDeviceTypeRepository.cs" />
     <Compile Include="04 IRepository\Business\IProductRepository.cs" />
     <Compile Include="04 IRepository\Business\IRoomRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IAreaRepository.cs" />

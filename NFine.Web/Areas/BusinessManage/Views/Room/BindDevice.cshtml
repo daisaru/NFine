@@ -30,7 +30,7 @@
                 { label: "设备类型", name: "F_DeviceTypeName", width: 100, align: 'left' },
                 { label: "设备标识", name: "F_DeviceId", width: 200, align: 'left' },
                 { label: '设备状态', name: 'F_StatusName', width: 100, align: 'left' },
-                { label: '备注', name: 'F_Description', width: 300, align: 'left' }
+                { label: '设备备注', name: 'F_Description', width: 300, align: 'left' }
             ]
         });
     }
@@ -45,6 +45,7 @@
                 var html = "";
                 var pro = data;
                 deviceTypes = data;
+                console.log(deviceTypes);
                 html += "<option value=''> --请选择-- </option>"
                 if (pro) {
                     for (var i = 0; i < pro.length; i++) {
@@ -95,12 +96,12 @@
         show_type_items();
     }
     function submitForm() {
-        if (!$('#form1').formValid()) {
+        if (!$('#form_binddevice').formValid()) {
             return false;
         }
         $.submitForm({
             url: "/BusinessManage/Room/SubmitFormBindDevice?keyValue=" + keyValue,
-            param: $("#form1").formSerialize(),
+            param: $("#form_binddevice").formSerialize(),
             success: function () {
                 $.currentWindow().$("#gridList").resetSelection();
                 $.currentWindow().$("#gridList").trigger("reloadGrid");
@@ -115,7 +116,7 @@
     <table id="currentDeviceGridList"></table>
 </div>
 
-<form id="form1" style="padding-top: 5px; margin-left:5px; margin-right: 5px;">
+<form id="form_binddevice" style="padding-top: 5px; margin-left:5px; margin-right: 5px;">
     <div style="text-align:center; padding-top: 20px; margin-right: 20px;">
         <table class="form" style="width: 60%; margin:auto;">
             <tr>
@@ -128,14 +129,6 @@
                 <th class="formTitle">设备编号</th>
                 <td class="formValue">
                     <select id="F_Id" name="F_Id" class="form-control required"></select>
-                </td>
-            </tr>
-            <tr>
-                <th class="formTitle" valign="top" style="padding-top: 5px;">
-                    备注
-                </th>
-                <td class="formValue">
-                    <textarea id="F_Description" name="F_Description" class="form-control" style="height: 60px;"></textarea>
                 </td>
             </tr>
         </table>

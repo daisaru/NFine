@@ -15,6 +15,43 @@ namespace NFine.Application.Business
         private IDeviceRepository deviceRepository = new DeviceRepository();
         private IRoomDeviceRepository roomDeviceRepository = new RoomDeviceRepository();
 
+        public void SubmitBindForm(DeviceEntity device, string roomId)
+        {
+            RoomDeviceEntity entity = new RoomDeviceEntity();
+            entity.Create();
+            entity.F_DeviceId = device.F_Id;
+            entity.F_RoomId = roomId;
+            roomDeviceRepository.Insert(entity);
+        }
+
+        public List<DeviceEntity> GetUnbindDevices(string typeId)
+        {
+            List<DeviceEntity> devices = new List<DeviceEntity>();
+            var expTypeId = ExtLinq.True<DeviceEntity>();
+
+            if(!string.IsNullOrEmpty(typeId))
+            {
+                expTypeId = expTypeId.And(t => t.F_DeviceTypeId == typeId);
+            }
+
+            devices = deviceRepository.IQueryable(expTypeId).ToList();
+
+            List<DeviceEntity> ret = new List<DeviceEntity>();
+            foreach(DeviceEntity device in devices)
+            {
+
+                var expBind = ExtLinq.True<RoomDeviceEntity>();
+                expBind = expBind.And(t => t.F_DeviceId == device.F_Id);
+                var tmp = roomDeviceRepository.FindEntity(expBind);
+                if(tmp == null)
+                {
+                    ret.Add(device);
+                }
+            }
+
+            return ret;
+        }
+
         public List<DeviceEntity> GetBindDevices(string keyValue)
         {
             List<DeviceEntity> ret = new List<DeviceEntity>();
@@ -41,7 +78,10 @@ namespace NFine.Application.Business
                 }             
             }
 
-            ret = deviceRepository.IQueryable(expDevice).ToList();
+            if(deviceIds.Count > 0)
+            {
+                ret = deviceRepository.IQueryable(expDevice).ToList();
+            }
 
             return ret;
         }

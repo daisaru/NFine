@@ -75,8 +75,20 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetDeviceTypeTreeSelectJson()
         {
- 
-            return Content("");
+            var deviceTypes = deviceTypeData;
+            
+            var treeList = new List<TreeSelectModel>();
+            foreach(ItemsDetailEntity item in deviceTypes)
+            {
+                TreeSelectModel treeModel = new TreeSelectModel();
+                treeModel.id = item.F_Id;
+                treeModel.text = item.F_ItemName;
+                treeModel.parentId = item.F_ParentId == null ? "0" : item.F_ParentId;
+                treeModel.data = deviceApp.GetUnbindDevices(item.F_Id);
+                treeList.Add(treeModel);
+            }
+            string tmp = treeList.TreeSelectJson();
+            return Content(tmp);
         }
 
         [HttpGet]
@@ -190,6 +202,7 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitFormBindDevice(DeviceEntity deviceEntity, string keyValue)
         {
+            deviceApp.SubmitBindForm(deviceEntity, keyValue);
             return Success("操作成功。");
         }
 

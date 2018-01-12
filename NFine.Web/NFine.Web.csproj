@@ -380,6 +380,16 @@
     <Content Include="Content\Site.css" />
     <Content Include="DB\NFineBase.sql" />
     <Content Include="DB\NFine_Business.pdb" />
+    <Content Include="DB\sql\ Populate_[192.168.200.100_NFineBase_Buz_CustomerAccount]_script.sql" />
+    <Content Include="DB\sql\ Populate_[192.168.200.100_NFineBase_Buz_CustomerType]_script.sql" />
+    <Content Include="DB\sql\ Populate_[192.168.200.100_NFineBase_Buz_Customer]_script.sql" />
+    <Content Include="DB\sql\ Populate_[192.168.200.100_NFineBase_Buz_DeviceStatus]_script.sql" />
+    <Content Include="DB\sql\ Populate_[192.168.200.100_NFineBase_Buz_DeviceType]_script.sql" />
+    <Content Include="DB\sql\ Populate_[192.168.200.100_NFineBase_Buz_Device]_script.sql" />
+    <Content Include="DB\sql\ Populate_[192.168.200.100_NFineBase_Buz_Room]_script.sql" />
+    <Content Include="DB\sql\ Populate_[192.168.200.100_NFineBase_Buz_Section]_script.sql" />
+    <Content Include="DB\sql\Populate_[192.168.200.100_NFineBase_Buz_Contract]_script.sql" />
+    <Content Include="DB\sql\Populate_[192.168.200.100_NFineBase_Buz_SectionDevice]_script.sql" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Index.htm" />
@@ -389,6 +399,7 @@
     <Content Include="Areas\BusinessManage\Views\Room\Form.cshtml" />
     <Content Include="Areas\BusinessManage\Views\Room\BindDevice.cshtml" />
     <Content Include="Areas\BusinessManage\Views\Room\UnBindDevice.cshtml" />
+    <Content Include="DB\backup\NFineBase_0112.bak" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -1,0 +1,3 @@
+
+INSERT INTO [dbo].[Buz_CustomerType]([F_Id],[F_CustomerTypeName],[F_CustomerTypeLevel],[F_Description],[F_CreatorTime],[F_CreatorUserId],[F_LastModifyTime],[F_LastModifyUserId],[F_DeleteMark],[F_DeleteTime],[F_DeleteUserId]) VALUES (NEWID(),N'Holder',0,N'Hourse owner.',GETDATE(),N'Edward6',null,null,0,null,null)
+INSERT INTO [dbo].[Buz_CustomerType]([F_Id],[F_CustomerTypeName],[F_CustomerTypeLevel],[F_Description],[F_CreatorTime],[F_CreatorUserId],[F_LastModifyTime],[F_LastModifyUserId],[F_DeleteMark],[F_DeleteTime],[F_DeleteUserId]) VALUES (NEWID(),N'Renter',0,N'Customer.',GETDATE(),N'Jorge1',null,null,0,null,null)

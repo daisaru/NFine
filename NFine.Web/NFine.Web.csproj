@@ -388,6 +388,7 @@
     <Content Include="Areas\BusinessManage\Views\Room\Index.cshtml" />
     <Content Include="Areas\BusinessManage\Views\Room\Form.cshtml" />
     <Content Include="Areas\BusinessManage\Views\Room\BindDevice.cshtml" />
+    <Content Include="Areas\BusinessManage\Views\Room\UnBindDevice.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

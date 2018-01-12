@@ -15,6 +15,15 @@ namespace NFine.Application.Business
         private IDeviceRepository deviceRepository = new DeviceRepository();
         private IRoomDeviceRepository roomDeviceRepository = new RoomDeviceRepository();
 
+        public void UnbindDevice(string deviceId)
+        {
+            var expBind = ExtLinq.True<RoomDeviceEntity>();
+            expBind = expBind.And(t => t.F_DeviceId == deviceId);
+            var tmp = roomDeviceRepository.FindEntity(expBind);
+            tmp.Remove();
+            roomDeviceRepository.Delete(tmp);
+        }
+
         public void SubmitBindForm(DeviceEntity device, string roomId)
         {
             RoomDeviceEntity entity = new RoomDeviceEntity();

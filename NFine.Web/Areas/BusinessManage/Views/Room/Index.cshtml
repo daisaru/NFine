@@ -91,6 +91,17 @@
             }
         });
     }
+    function btn_unbind() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "UnBindDevice",
+            title: "解绑设备",
+            url: "/BusinessManage/Room/UnBindDevice?keyValue=" + keyValue,
+            width: "800px",
+            height: "400px",
+            btn: null,
+        });
+    }
 </script>
 
 <div class="topPanel">
@@ -122,6 +133,7 @@
                 <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除房源</a></li>
                 <li class="split"></li>
                 <li><a id="NF-bind" authorize="yes" onclick="btn_bind()"><i class="fa fa-magnet"></i>绑定设备</a></li>
+                <li><a id="NF-unbind" authorize="yes" onclick="btn_unbind()"><i class="fa fa-times-circle"></i>解绑设备</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>

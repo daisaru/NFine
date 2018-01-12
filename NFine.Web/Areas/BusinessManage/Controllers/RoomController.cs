@@ -44,6 +44,13 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
         }
 
         [HttpGet]
+        [HandlerAuthorize]
+        public ActionResult UnBindDevice()
+        {
+            return View();
+        }
+
+        [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetDeviceTreeGridJson(string keyValue)
         {
@@ -204,6 +211,16 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
         {
             deviceApp.SubmitBindForm(deviceEntity, keyValue);
             return Success("操作成功。");
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [HandlerAuthorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult UnbindDevice(string keyValue)
+        {
+            deviceApp.UnbindDevice(keyValue);
+            return Success("解绑成功。");
         }
 
         [HttpPost]

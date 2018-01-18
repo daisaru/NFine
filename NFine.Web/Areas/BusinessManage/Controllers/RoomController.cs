@@ -25,7 +25,7 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
         private List<ItemsDetailEntity> deviceTypeData = new List<ItemsDetailEntity>();
         private List<ItemsDetailEntity> deviceStatusData = new List<ItemsDetailEntity>();
 
-        private const string strOwnerTypeId = "10FB9113-4CC3-40C5-A442-6AFD004E9788";
+        private const string strOwnerTypeId = "516ff481-bdfd-46cd-b9a9-2d86987e7c76";
 
         public RoomController()
         {
@@ -122,39 +122,6 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetOwnerSelectJson()
-        {
-            var treeList = new List<TreeSelectModel>();
-            foreach (CustomerEntity item in ownerData)
-            {
-                TreeSelectModel treeModel = new TreeSelectModel();
-                treeModel.id = item.F_Id;
-                treeModel.text = item.F_RealName;
-                treeModel.parentId = "0";
-                treeList.Add(treeModel);
-            }
-            return Content(treeList.TreeSelectJson());
-        }
-
-        [HttpGet]
-        [HandlerAjaxOnly]
-        public ActionResult GetTreeSelectJson()
-        {
-            var data = roomManageApp.GetList();
-            var treeList = new List<TreeSelectModel>();
-            foreach(RoomEntity item in data)
-            {
-                TreeSelectModel treeModel = new TreeSelectModel();
-                treeModel.id = item.F_Id;
-                treeModel.text = item.F_RoomName;
-                treeModel.parentId = item.F_ParentRoomId;
-                treeList.Add(treeModel);
-            }
-            return Content(treeList.TreeSelectJson());
-        }
-
-        [HttpGet]
-        [HandlerAjaxOnly]
         public ActionResult GetRoomsTreeGridJson(string keyword)
         {
             var data = roomManageApp.GetList();
@@ -174,6 +141,7 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
                 roomEntityExtend.F_ProvinceName = areaData.Where(t => t.F_Id == item.F_ProvinceId).ToList()[0].F_FullName.Trim();
                 roomEntityExtend.F_CityName = areaData.Where(t => t.F_Id == item.F_CityId).ToList()[0].F_FullName.Trim();
                 roomEntityExtend.F_OwnerName = ownerData.Where(t => t.F_Id == item.F_OwnerId).ToList()[0].F_RealName.Trim();
+                roomEntityExtend.F_ContractStatus = "1";
 
                 treeModel.entityJson = roomEntityExtend.ToJson();
                 treeList.Add(treeModel);
@@ -185,14 +153,6 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
             }
 
             return Content(treeList.TreeGridJson());
-        }
-
-        [HttpGet]
-        [HandlerAjaxOnly]
-        public ActionResult GetFromJson(string keyValue)
-        {
-            var data = roomManageApp.GetForm(keyValue);
-            return Content(data.ToJson());
         }
 
         [HttpPost]
@@ -233,5 +193,48 @@ namespace NFine.Web.Areas.BusinessManage.Controllers
             return Success("删除成功。");
         }
 
+        #region 房源表单
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetFormJson(string keyValue)
+        {
+            var data = roomManageApp.GetForm(keyValue);
+            return Content(data.ToJson());
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetOwnerSelectJson()
+        {
+            var treeList = new List<TreeSelectModel>();
+            foreach (CustomerEntity item in ownerData)
+            {
+                TreeSelectModel treeModel = new TreeSelectModel();
+                treeModel.id = item.F_Id;
+                treeModel.text = item.F_RealName;
+                treeModel.parentId = "0";
+                treeList.Add(treeModel);
+            }
+            return Content(treeList.TreeSelectJson());
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetTreeSelectJson()
+        {
+            var data = roomManageApp.GetList();
+            var treeList = new List<TreeSelectModel>();
+            foreach (RoomEntity item in data)
+            {
+                TreeSelectModel treeModel = new TreeSelectModel();
+                treeModel.id = item.F_Id;
+                treeModel.text = item.F_RoomName;
+                treeModel.parentId = item.F_ParentRoomId;
+                treeList.Add(treeModel);
+            }
+            return Content(treeList.TreeSelectJson());
+        }
+
+        #endregion
     }
 }

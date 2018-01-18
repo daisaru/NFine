@@ -17,19 +17,33 @@
             colModel: [
                 { label: "房间主键", name: "F_Id", hidden: true, key: true },
                 { label: "上级房间主键", name: "F_ParentRoomId", hidden: true },
-                { label: "房间名称", name: "F_RoomName", width: 200, align: 'left' },
-                { label: "小区名称", name: "F_CommunityName", width: 100, align: 'left' },
+                { label: "房间名称", name: "F_RoomName", width: 200, align: 'center' },
+                { label: "小区名称", name: "F_CommunityName", width: 100, align: 'center' },
+                {
+                    label: "合约状态", name: "F_ContractStatus", width: 60, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 0) {
+                            return '<span class=\"label label-warning\">待租</span>';
+                        } else if (cellvalue == 1) {
+                            return '<span class=\"label label-success\">在租</span>';
+                        } else if (cellvalue == 2) {
+                            return '<span class=\"label label-primary\">预约</span>';
+                        } else if (cellvalue < 0) {
+                            return '<span class=\"label label-default\">停用</span>';
+                        }
+                    }
+                },
                 { label: "房东信息主键", name: "F_OwnerId", hidden: true },
-                { label: "房屋所有人", name: "F_OwnerName", width: 100, align: 'left' },
-                { label: '省/直辖市', name: 'F_ProvinceName', width: 100, align: 'left' },
-                { label: '市/区', name: 'F_CityName', width: 100, align: 'left' },
-                { label: '地址', name: 'F_Address', width: 100, align: 'left' },
-                { label: '门牌号', name: 'F_AddressNumber', width: 50, align: 'left' },
-                { label: '楼号', name: 'F_BuildingNumber', width: 50, align: 'left' },
-                { label: '单元号', name: 'F_SectionNumber', width: 50, align: 'left' },
-                { label: '房号', name: 'F_RoomNumber', width: 50, align: 'left' },
-                { label: '经度', name: 'F_Lng', width: 100, align: 'left' },
-                { label: '纬度', name: 'F_Lat', width: 100, align: 'left' },
+                { label: "房屋所有人", name: "F_OwnerName", width: 100, align: 'center' },
+                { label: '省/直辖市', name: 'F_ProvinceName', width: 100, align: 'center' },
+                { label: '市/区', name: 'F_CityName', width: 100, align: 'center' },
+                { label: '地址', name: 'F_Address', width: 100, align: 'center' },
+                { label: '门牌号', name: 'F_AddressNumber', width: 50, align: 'center' },
+                { label: '楼号', name: 'F_BuildingNumber', width: 50, align: 'center' },
+                { label: '单元号', name: 'F_SectionNumber', width: 50, align: 'center' },
+                { label: '房号', name: 'F_RoomNumber', width: 50, align: 'center' },
+                { label: '经度', name: 'F_Lng', width: 100, align: 'center' },
+                { label: '纬度', name: 'F_Lat', width: 100, align: 'center' },
                 {
                     label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }

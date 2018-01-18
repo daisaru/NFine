@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script>
+
+    var keyValue = $.request("keyValue");
+    var areaDatas;
+
+    $(function () {
+        initControl();
+        if (!!keyValue) {
+            $.ajax({
+                url: "/BusinessManage/Device/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                }
+            });
+        }
+    });
+
+
+    function initControl() {
+        $("#F_ParentId").bindSelect({
+            url: "/BusinessManage/Device/GetTreeSelectJson"
+        });
+        $("#F_StatusId").bindSelect({
+            url: "/BusinessManage/Device/GetStatusSelectJson"
+        });
+        $("#F_DeviceTypeId").bindSelect({
+            url: "/BusinessManage/Device/GetDeviceTypeSelectJson"
+        });
+  
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/BusinessManage/Device/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form" style="width: 95%;">
+            <tr>
+                <th class="formTitle">上级</th>
+                <td class="formValue">
+                    <select id="F_ParentId" name="F_ParentId" class="form-control required">
+                        <option value="0">父节点</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">设备名称</th>
+                <td class="formValue">
+                    <input id="F_DeviceName" name="F_DeviceName" type="text" class="form-control required" placeholder="请输入设备名称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">设备标识</th>
+                <td class="formValue">
+                    <input id="F_DeviceId" name="F_DeviceId" type="text" class="form-control required" placeholder="请输入设备唯一标识" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">设备类型</th>
+                <td class="formValue">
+                    <select id="F_DeviceTypeId" name="F_DeviceTypeId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">品牌</th>
+                <td class="formValue">
+                    <input id="F_Brand" name="F_Brand" type="text" class="form-control required" placeholder="请输入品牌" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">型号</th>
+                <td class="formValue">
+                    <input id="F_Model" name="F_Brand" type="text" class="form-control required" placeholder="请输入型号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">硬件版本号</th>
+                <td class="formValue">
+                    <input id="F_HardwareVersion" name="F_HardwareVersion" type="text" class="form-control required" placeholder="请输入硬件版本号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">软件版本号</th>
+                <td class="formValue">
+                    <input id="F_SoftwareVersion" name="F_SoftwareVersion" type="text" class="form-control required" placeholder="请输入软件版本号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">制造商</th>
+                <td class="formValue">
+                    <input id="F_Producer" name="F_Producer" type="text" class="form-control required" placeholder="请输入制造商" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">出厂日期</th>
+                <td class="formValue">
+                    <input id="F_ProductTime" name="F_ProductTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">使用日期</th>
+                <td class="formValue">
+                    <input id="F_DeployTime" name="F_DeployTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">设备状态</th>
+                <td class="formValue">
+                    <select id="F_StatusId" name="F_StatusId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">
+                    备注
+                </th>
+                <td class="formValue">
+                    <textarea id="F_Description" name="F_Description" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

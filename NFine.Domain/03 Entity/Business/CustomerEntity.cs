@@ -9,8 +9,7 @@ namespace NFine.Domain.Entity.Business
     public class CustomerEntity : IEntity<CustomerEntity>, ICreationAudited, IDeleteAudited, IModificationAudited
     {
         public string F_Id { get; set; }
-
-        public string F_Account { get; set; }
+        public string F_ParentId { get; set; }
         public string F_RealName { get; set; }
         public string F_NickName { get; set; }
         public string F_HeadIcon { get; set; }
@@ -19,8 +18,9 @@ namespace NFine.Domain.Entity.Business
         public string F_MobilePhone { get; set; }
         public string F_Email { get; set; }
         public string F_WeChat { get; set; }
-        public string F_Signature { get; set; }
+        public string F_IdCard { get; set; }
         public string F_CustomerTypeId { get; set; }
+        public string F_CustomerLevelId { get; set; }
         public string F_Company { get; set; }
         public string F_Department { get; set; }
         public string F_Duty { get; set; }

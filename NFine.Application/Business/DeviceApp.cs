@@ -15,6 +15,43 @@ namespace NFine.Application.Business
         private IDeviceRepository deviceRepository = new DeviceRepository();
         private IRoomDeviceRepository roomDeviceRepository = new RoomDeviceRepository();
 
+        public DeviceEntity GetForm(string keyValue)
+        {
+            return deviceRepository.FindEntity(keyValue);
+        }
+
+        public void DeleteForm(string keyValue)
+        {
+            if (deviceRepository.IQueryable().Count(t => t.F_ParentId.Equals(keyValue)) > 0)
+            {
+                throw new Exception("删除失败！操作的对象包含了下级数据。");
+            }
+            else
+            {
+                deviceRepository.Delete(t => t.F_Id == keyValue);
+            }
+        }
+
+        public void SubmitForm(DeviceEntity deviceEntity, string keyValue)
+        {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                deviceEntity.Modify(keyValue);
+                deviceRepository.Update(deviceEntity);
+            }
+            else
+            {
+                deviceEntity.Create();
+                deviceRepository.Insert(deviceEntity);
+            }
+        }
+
+        public List<DeviceEntity> GetList()
+        {
+            List<DeviceEntity> devices = deviceRepository.IQueryable().OrderBy(t => t.F_Brand).ToList();
+            return devices;
+        }
+
         public void UnbindDevice(string deviceId)
         {
             var expBind = ExtLinq.True<RoomDeviceEntity>();

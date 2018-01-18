@@ -10,6 +10,7 @@ namespace NFine.Domain.Entity.Business
     {
         public string F_Id { get; set; }
 
+        public string F_ParentId { get; set; }
         public string F_CustomerId { get; set; }
         public string F_AccountName { get; set; }
         public string F_AccountId { get; set; }

@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    var customerId = $.request("keyValue");
+    $(function () {
+        accountGridList();
+    })
+    function accountGridList() {
+        var $gridList = $("#accountGridList");
+        $("#accountGridList").dataGrid({
+            treeGrid: true,
+            treeGridModel: "adjacency",
+            ExpandColumn: "F_AccountId",
+            url: "/BusinessManage/Customer/GetAccountTreeGridJson?customerId=" + customerId,
+            height: $(window).height() - 90,
+            colModel: [
+                { label: "主键", name: "F_Id", hidden: true, key: true },
+                { label: "父账户主键", name: "F_ParentId", hidden: true },
+                { label: "客户主键", name: "F_CustomerId", hidden: true },
+                { label: '账户名称', name: 'F_AccountName', width: 100, align: 'left' },
+                { label: '账号', name: 'F_AccountId', width: 150, align: 'left' },
+                {
+                    label: '默认', name: 'F_DefaultAccount', width: 50, align: 'center',
+                    formatter: function (cellvalue) {
+                        if (cellvalue == true) {
+                            return "是";
+                        } else {
+                            return "否";
+                        }
+                    }
+                },
+                { label: '银行名称', name: 'F_BankName', width: 100, align: 'center' },
+                { label: '分行代码', name: 'F_BankCode', width: 100, align: 'left' },
+                { label: '有效期开始', name: 'F_ValidStart', width: 100, align: 'left' },
+                { label: '有效期结束', name: 'F_ValidEnd', width: 100, align: 'left' },
+                {
+                    label: '创建时间', name: 'F_CreatorTime', width: 100, align: 'left',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                },
+                { label: '备注', name: 'F_Description', width: 200, align: 'left' }
+            ]
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "AccountForm",
+            title: "新增账户",
+            url: "/BusinessManage/Customer/AccountForm?customerId=" + customerId,
+            width: "700px",
+            height: "440px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#accountGridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "AccountForm",
+            title: "修改账户",
+            url: "/BusinessManage/Customer/AccountForm?customerId=" + customerId + "&keyValue=" + keyValue,
+            width: "700px",
+            height: "440px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/BusinessManage/Customer/DeleteAccountForm",
+            param: { keyValue: $("#accountGridList").jqGridRowValue().F_Id },
+            success: function () {
+                $("#accountGridList").resetSelection();
+                $("#accountGridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#accountGridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Details",
+            title: "查看账户",
+            url: "/BusinessManage/Customer/AccountDetails?customerId=" + customerId + "&keyValue=" + keyValue,
+            width: "600px",
+            height: "500px",
+            btn: null,
+        });
+    }
+</script>
+<div class="topPanel" style="border: 0px;">
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="btn_add()"><i class="fa fa-plus"></i>新建账户</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改账户</a></li>
+                <li><a onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除账户</a></li>
+                <li><a onclick="btn_details()"><i class="fa fa-search-plus"></i>查看账户</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="accountGridList"></table>
+    <style>
+        .ui-jqgrid {
+            border-left: 0px;
+            border-right: 0px;
+            border-bottom: 0px;
+        }
+    </style>
+</div>

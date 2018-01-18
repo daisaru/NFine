@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script>
+
+    var keyValue = $.request("keyValue");
+    var areaDatas;
+
+    $(function () {
+        initControl();
+        if (!!keyValue) {
+            $.ajax({
+                url: "/BusinessManage/Customer/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                }
+            });
+        }
+    });
+
+    function initControl() {
+        $("#F_ParentId").bindSelect({
+            url: "/BusinessManage/Customer/GetTreeSelectJson"
+        });
+        $("#F_CustomerTypeId").bindSelect({
+            url: "/BusinessManage/Customer/GetCustomerTypeSelectJson"
+        });
+        $("#F_CustomerLevelId").bindSelect({
+            url: "/BusinessManage/Customer/GetCustomerLevelSelectJson"
+        });
+  
+    }
+
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/BusinessManage/Customer/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form" style="width: 95%;">
+            <tr>
+                <th class="formTitle">上级</th>
+                <td class="formValue">
+                    <select id="F_ParentId" name="F_ParentId" class="form-control required">
+                        <option value="0">父节点</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">客户姓名</th>
+                <td class="formValue">
+                    <input id="F_RealName" name="F_RealName" type="text" class="form-control required" placeholder="请输入客户姓名" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">客户昵称</th>
+                <td class="formValue">
+                    <input id="F_NickName" name="F_NickName" type="text" class="form-control required" placeholder="请输入客户昵称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">身份证号</th>
+                <td class="formValue">
+                    <input id="F_IdCard" name="F_IdCard" type="text" class="form-control required" placeholder="请输入身份证号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">性别</th>
+                <td class="formValue">
+                    <select id="F_Gender" name="F_Gender" class="form-control required">
+                        <option value="true">男</option>
+                        <option value="false">女</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">生日</th>
+                <td class="formValue">
+                    <input id="F_Birthday" name="F_Birthday" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">手机号</th>
+                <td class="formValue">
+                    <input id="F_MobilePhone" name="F_MobilePhone" type="text" class="form-control required" placeholder="请输入手机号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">邮件地址</th>
+                <td class="formValue">
+                    <input id="F_Email" name="F_Email" type="text" class="form-control required" placeholder="请输入邮件地址" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">微信号</th>
+                <td class="formValue">
+                    <input id="F_WeChat" name="F_WeChat" type="text" class="form-control required" placeholder="请输入微信号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">客户类型</th>
+                <td class="formValue">
+                    <select id="F_CustomerTypeId" name="F_CustomerTypeId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">客户级别</th>
+                <td class="formValue">
+                    <select id="F_CustomerLevelId" name="F_CustomerLevelId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">单位</th>
+                <td class="formValue">
+                    <input id="F_Company" name="F_WeChat" type="text" class="form-control required" placeholder="请输入任职单位名称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">部门</th>
+                <td class="formValue">
+                    <input id="F_Department" name="F_Department" type="text" class="form-control required" placeholder="请输入任职部门名称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">职务</th>
+                <td class="formValue">
+                    <input id="F_Duty" name="F_Duty" type="text" class="form-control required" placeholder="请输入职务名称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">
+                    备注
+                </th>
+                <td class="formValue">
+                    <textarea id="F_Description" name="F_Description" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

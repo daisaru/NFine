@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using NFine.Code;
 using NFine.Domain.Entity.Business;
 using NFine.Domain.IRepository.Business;
 using NFine.Repository.Business;
@@ -13,7 +13,6 @@ namespace NFine.Application.Business
     public class CustomerApp
     {
         private ICustomerRepository customerRepository = new CustomerRepository();
-        private ICustomerTypeRepository customerTypeRepository = new CustomerTypeRepository();
         private ICustomerAccountRepository customerAccountRepository = new CustomerAccountRepository();
 
         public List<CustomerEntity> GetTypeCustomers(string typeId)
@@ -29,15 +28,11 @@ namespace NFine.Application.Business
             return customers;
         }
 
-        public List<CustomerTypeEntity> GetCustomerTypes()
+        public List<CustomerAccountEntity> GetCustomerAccounts(string customerId)
         {
-            List<CustomerTypeEntity> types = customerTypeRepository.IQueryable().ToList();
-            return types;
-        }
-
-        public List<CustomerAccountEntity> GetCustomerAccounts()
-        {
-            List<CustomerAccountEntity> accounts = customerAccountRepository.IQueryable().ToList();
+            var expQuery = ExtLinq.True<CustomerAccountEntity>();
+            expQuery = expQuery.And(t => t.F_CustomerId == customerId);
+            List<CustomerAccountEntity> accounts = customerAccountRepository.IQueryable(expQuery).ToList();
             return accounts;
         }
 

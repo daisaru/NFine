@@ -51,7 +51,6 @@
     <Compile Include="Business\ContractMap.cs" />
     <Compile Include="Business\CustomerAccountMap.cs" />
     <Compile Include="Business\CustomerMap.cs" />
-    <Compile Include="Business\CustomerTypeMap.cs" />
     <Compile Include="Business\RoomDeviceMap.cs" />
     <Compile Include="Business\DeviceMap.cs" />
     <Compile Include="Business\ProductMap.cs" />

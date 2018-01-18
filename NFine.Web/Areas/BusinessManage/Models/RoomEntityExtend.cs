@@ -15,6 +15,8 @@ namespace NFine.Web.Areas.BusinessManage.Models
         public string F_TownName { get; set; }
         public string F_OwnerName { get; set; }
 
+        public string F_ContractStatus { get; set; }
+
         public RoomEntityExtend(RoomEntity room)
         {
             Tools.CopyModel(this, room);          

@@ -42,7 +42,6 @@
     <Compile Include="Business\ContractRepository.cs" />
     <Compile Include="Business\CustomerAccountRepository.cs" />
     <Compile Include="Business\CustomerRepository.cs" />
-    <Compile Include="Business\CustomerTypeRepository.cs" />
     <Compile Include="Business\RoomDeviceRepository.cs" />
     <Compile Include="Business\DeviceRepository.cs" />
     <Compile Include="Business\ProductRepository.cs" />

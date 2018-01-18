@@ -111,6 +111,7 @@
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
     <Compile Include="Areas\BusinessManage\BusinessManageAreaRegistration.cs" />
+    <Compile Include="Areas\BusinessManage\Controllers\CustomerController.cs" />
     <Compile Include="Areas\BusinessManage\Controllers\DeviceController.cs" />
     <Compile Include="Areas\BusinessManage\Controllers\RoomController.cs" />
     <Compile Include="Areas\BusinessManage\Models\CustomerEntityExtend.cs" />
@@ -400,6 +401,14 @@
     <Content Include="Areas\BusinessManage\Views\Room\BindDevice.cshtml" />
     <Content Include="Areas\BusinessManage\Views\Room\UnBindDevice.cshtml" />
     <Content Include="DB\backup\NFineBase_0112.bak" />
+    <Content Include="Areas\BusinessManage\Views\Device\Index.cshtml" />
+    <Content Include="Areas\BusinessManage\Views\Device\Form.cshtml" />
+    <Content Include="Areas\BusinessManage\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\BusinessManage\Views\Customer\Form.cshtml" />
+    <Content Include="Areas\BusinessManage\Views\Customer\Account.cshtml" />
+    <Content Include="Areas\BusinessManage\Views\Customer\AccountDetails.cshtml" />
+    <Content Include="Areas\BusinessManage\Views\Customer\AccountForm.cshtml" />
+    <Content Include="DB\backup\NFineBase_0118.zip" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -590,7 +599,6 @@
     <Content Include="Areas\ReportManage\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\BusinessManage\Views\Device\" />
     <Folder Include="Areas\ReportManage\Views\Echarts\" />
   </ItemGroup>
   <ItemGroup>

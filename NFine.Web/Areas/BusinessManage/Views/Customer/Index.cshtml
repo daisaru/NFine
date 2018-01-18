@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            treeGrid: true,
+            treeGridModel: "adjacency",
+            ExpandColumn: "F_Gender",
+            url: "/BusinessManage/Customer/GetCustomerTreeGridJson",
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "客户主键", name: "F_Id", hidden: true, key: true },
+                { label: "客户名称", name: "F_RealName", width: 100, align: 'left' },
+                { label: "客户昵称", name: "F_NickName", width: 100, align: 'left' },
+                { label: '身份证号', name: 'F_IdCard', width: 150, align: 'left' },
+                { label: "客户头像", name: "F_HeadIcon", hidden: true },
+                {
+                    label: "性别", name: "F_Gender", width: 50, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == false) {
+                            return '<span>女</span>';
+                        } else if (cellvalue == true) {
+                            return '<span>男</span>';
+                        }
+                    }
+                },
+                { label: "生日", name: "F_Birthday", width: 100, align: 'left' },
+                { label: '手机号', name: 'F_MobilePhone', width: 100, align: 'left' },
+                { label: '邮箱', name: 'F_Email', width: 150, align: 'left' },
+                { label: '微信号', name: 'F_WeChat', width: 100, align: 'left' },
+                { label: "客户类型主键", name: "F_CustomerTypeId", hidden: true },
+                { label: '客户类型', name: 'F_CustomerTypeName', width: 50, align: 'center' },
+                { label: '客户级别', name: 'F_CustomerLevel', width: 50, align: 'center' },
+                { label: '公司', name: 'F_Company', width: 100, align: 'left' },
+                { label: '部门', name: 'F_Department', width: 100, align: 'left' },
+                { label: '职务', name: 'F_Duty', width: 50, align: 'left' },
+                {
+                    label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                },
+                { label: '备注', name: 'F_Description', width: 300, align: 'left' }
+            ]
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增用户",
+            url: "/BusinessManage/Customer/Form",
+            width: "450px",
+            height: "340px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Form",
+            title: "修改用户",
+            url: "/BusinessManage/Customer/Form?keyValue=" + keyValue,
+            width: "450px",
+            height: "340px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_account() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Account",
+            title: "账户管理",
+            url: "/BusinessManage/Customer/Account?keyValue=" + keyValue,
+            width: "800px",
+            height: "400px",
+            btn: null,
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/BusinessManage/Customer/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+
+<div class="topPanel">
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a id="NF-customer-add" authorize="yes" class="btn btn-primary" onclick="btn_add()"><i class="fa fa-plus"></i>新增用户</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a id="NF-customer-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改用户</a></li>
+                <li><a id="NF-customer-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除用户</a></li>
+                <li class="split"></li>
+                <li><a id="NF-customer-account" authorize="yes" onclick="btn_account()"><i class="fa fa-bank"></i>账户管理</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+</div>

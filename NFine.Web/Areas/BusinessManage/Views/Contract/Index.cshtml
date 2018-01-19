@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            treeGrid: true,
+            treeGridModel: "adjacency",
+            ExpandColumn: "F_RoomName",
+            url: "/BusinessManage/Contract/GetContractTreeGridJson",
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "合约主键", name: "F_Id", hidden: true, key: true },
+                { label: "上级合约主键", name: "F_ParentId", hidden: true },
+                { label: "合约名称", name: "F_ContractName", width: 100, align: 'left' },
+                { label: "单元主键", name: "F_RoomId", hidden: true },
+                { label: "单元名称", name: "F_RoomName", width: 150, align: 'left' },
+                { label: "房间主键", name: "F_SectionId", hidden: true },
+                { label: "房间名称", name: "F_SectionName", width: 100, align: 'left' },
+                { label: "客户主键", name: "F_CustomerId", hidden: true },
+                { label: "客户名称", name: "F_CustomerName", width: 100, align: 'left' },
+                {
+                    label: '签约价格', name: 'F_Price', width: 100, align: 'right',
+                    formatter: "currency", formatoptions: { thousandsSeparator: ",", decimalSeparator: ".", prefix: "￥" }
+                },
+                { label: '开始时间', name: 'F_ContractStart', width: 200, align: 'center' },
+                { label: '结束时间', name: 'F_ContractEnd', width: 200, align: 'center' },
+                { label: "合约状态主键", name: "F_ContractStatusId", hidden: true },
+                { label: "合约状态", name: "F_ContractStatusName", width: 100, align: 'center' },
+                {
+                    label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'center',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                },
+                { label: '备注', name: 'F_Description', width: 300, align: 'left' }
+            ]
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增合约",
+            url: "/BusinessManage/Contract/Form",
+            width: "450px",
+            height: "340px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Form",
+            title: "修改合约",
+            url: "/BusinessManage/Contract/Form?keyValue=" + keyValue,
+            width: "450px",
+            height: "340px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/BusinessManage/Contract/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+
+<div class="topPanel">
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a id="NF-contract-add" authorize="yes" class="btn btn-primary" onclick="btn_add()"><i class="fa fa-plus"></i>新增合约</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a id="NF-contract-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改合约</a></li>
+                <li><a id="NF-contract-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除合约</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+</div>

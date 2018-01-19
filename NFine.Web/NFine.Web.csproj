@@ -111,9 +111,11 @@
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
     <Compile Include="Areas\BusinessManage\BusinessManageAreaRegistration.cs" />
+    <Compile Include="Areas\BusinessManage\Controllers\ContractController.cs" />
     <Compile Include="Areas\BusinessManage\Controllers\CustomerController.cs" />
     <Compile Include="Areas\BusinessManage\Controllers\DeviceController.cs" />
     <Compile Include="Areas\BusinessManage\Controllers\RoomController.cs" />
+    <Compile Include="Areas\BusinessManage\Models\ContractEntityExtend.cs" />
     <Compile Include="Areas\BusinessManage\Models\CustomerEntityExtend.cs" />
     <Compile Include="Areas\BusinessManage\Models\DeviceEntityExtend.cs" />
     <Compile Include="Areas\BusinessManage\Models\RoomEntityExtend.cs" />
@@ -409,6 +411,9 @@
     <Content Include="Areas\BusinessManage\Views\Customer\AccountDetails.cshtml" />
     <Content Include="Areas\BusinessManage\Views\Customer\AccountForm.cshtml" />
     <Content Include="DB\backup\NFineBase_0118.zip" />
+    <Content Include="Areas\BusinessManage\Views\Contract\Index.cshtml" />
+    <Content Include="DB\backup\NFineBase_0119.zip" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

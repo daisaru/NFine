@@ -10,9 +10,13 @@ namespace NFine.Domain.Entity.Business
     {
         public string F_Id { get; set; }
 
+        public string F_ParentId { get; set; }
+        public string F_ContractName { get; set; }
         public string F_RoomId { get; set; }
         public string F_SectionId { get; set; }
         public string F_CustomerId { get; set; }
+        public decimal F_Price { get; set; }
+        public string F_ContractStatusId { get; set; }
         public DateTime F_ContractStart { get; set; }
         public DateTime F_ContractEnd { get; set; }
 

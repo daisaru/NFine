@@ -6,10 +6,6 @@ namespace NFine.Web
     [HandlerLogin]
     public abstract class ControllerBase : Controller
     {
-        public Log FileLog
-        {
-            get { return LogFactory.GetLogger(this.GetType().ToString()); }
-        }
         [HttpGet]
         [HandlerAuthorize]
         public virtual ActionResult Index()
